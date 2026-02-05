@@ -1,9 +1,11 @@
+import buildServer from "./app";
+
 const server = buildServer()
 const PORT = Number(process.env.PORT);
 const startServer = async () => {
   try {
     new Promise<void>((resolve, reject) => {
-      server.lister(
+      server.listen(
         {
           port: PORT,
           host: "0.0.0.0",

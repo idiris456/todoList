@@ -1,3 +1,4 @@
+import "dotenv/config";
 import express from "express";
 
 const buildServer = () => {
@@ -10,3 +11,5 @@ const buildServer = () => {
 
   return server;
 };
+
+export default buildServer;
