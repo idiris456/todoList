@@ -10,17 +10,21 @@ const getTodo = async (Request: Request, Response: Response) => {
   }
 };
 
-const postTodo = async (Request: Request, Response: Response) => {
+const postTodo = async (req: Request, res: Response) => {
   try {
-    const { title } = Request.body;
+    const { title } = req.body;
+
+    if (!title || typeof title !== "string") {
+      return res.status(400).json({ error: "Title is required" });
+    }
+
     const todo = await prisma.todo.create({
-      data: {
-        title,
-      },
+      data: { title },
     });
-    Response.status(201).json(todo);
+
+    return res.status(201).json(todo);
   } catch (error) {
-    Response.status(500).json({ error: "Failed to create todo" });
+    return res.status(500).json({ error: "Failed to create todo" });
   }
 };
 
